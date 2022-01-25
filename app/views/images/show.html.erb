@@ -12,7 +12,12 @@
       <%#= link_to @image.user.attached, profile_path(@image.user.id) %>
       <%#= link_to image_tag(current_user.avatar, class: "profile-pic mt-2"), profile_path(@image.user.id) %>
       <%#= link_to image_tag(@user.avatar, class: "profile-pic mt-2"), profile_path(@image.user.id) %>
-      <%= link_to @image.user.name, profile_path(@image.user.id) %>
+      <% if @image.user.avatar.attached? %>
+        <%= link_to image_tag(@image.user.avatar, class: "mini"), profile_path(@image.user.username) %>
+      <% else %>
+        <%= link_to image_tag("/images/no_photo.png", :class => "mini"), profile_path(@image.user.username) %>
+      <% end %>
+      <%= link_to @image.user.username, profile_path(@image.user.username), class: "search-text ms-1" %>
 
       <p class="border-top mt-3 py-2">
         <% if @image.description.present? %>

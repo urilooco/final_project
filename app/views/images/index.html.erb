@@ -51,11 +51,11 @@
                     <% end %>
                     <div class="container d-flex mt-2">
                         <% if image.user.avatar.attached? %>
-                            <%= image_tag url_for(image.user.avatar), :class => "mini" %>
+                            <%= link_to image_tag(image.user.avatar, class: "mini"), profile_path(image.user.username) %>
                         <% else %>
-                            <%= image_tag("/images/no_photo.png", :class => "mini") %>
+                            <%= link_to image_tag("/images/no_photo.png", :class => "mini"), profile_path(image.user.username) %>
                         <% end %>
-                        <p class="fw-bold ms-2 mt-1"><%= image.user.username %></p>
+                        <p class="fw-bold ms-2 mt-1"><%= link_to image.user.username, profile_path(image.user.username), class: "search-text" %></p>
                         <p class="mx-2 mt-1"><%= image.description %></p><br>
                     </div>
                     <div class="text-end container">

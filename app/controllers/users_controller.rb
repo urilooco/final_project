@@ -3,10 +3,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find_by(username: params[:username])
-    @user1 = current_user
-    # @user1 = User.find(4)
-    # @images = @user1.images.order(created_at: :desc)
-    @images = @user1.images
+    @images = @user.images.order(created_at: :desc)
   end
 
   def search

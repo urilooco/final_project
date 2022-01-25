@@ -7,22 +7,24 @@
                 <h4>No results found</h4>
                 <% else %>
                     <div class="card col-5 m-3">
-                        <div class="card-body d-flex">
-                            <div class="image mt-1">
-                                <% if user.avatar.attached? %>
-                                    <%= image_tag url_for(user.avatar), :class => "search-pic" %>
-                                <% else %>
-                                    <%= image_tag("/images/no_photo.png", :class => "search-pic") %>
-                                <% end %>
+                        <%= link_to profile_path(user.username) do %>
+                            <div class="card-body d-flex">
+                                <div class="image mt-1">
+                                    <% if user.avatar.attached? %>
+                                        <%= image_tag url_for(user.avatar), :class => "search-pic" %>
+                                    <% else %>
+                                        <%= image_tag("/images/no_photo.png", :class => "search-pic") %>
+                                    <% end %>
+                                </div>
+                                <div class="ms-3">
+                                    <span class="fw-bold search-text"><%= user.username %></span>
+                                    <br>
+                                    <span class="search-text"><%= user.name %></span>
+                                    <br>
+                                    <p class="mt-3 search-text"><%= user.bio %></p>
+                                </div>
                             </div>
-                            <div class="ms-3">
-                                <span class="fw-bold"><%= user.username %></span>
-                                <br>
-                                <span><%= user.name %></span>
-                                <br>
-                                <p class="mt-3"><%= user.bio %></p>
-                            </div>
-                        </div>
+                        <% end %>
                     </div>
                 <% end %>
             <% end %>
