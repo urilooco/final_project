@@ -1,0 +1,149 @@
+@import "active_storage_drag_and_drop";
+
+.asdndzone {
+  background: #f2f2f2;
+  border-radius: 4px;
+  border-width: 5px;
+  border-style: dashed;
+  padding-top: 0;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-size: cover;
+  background-blend-mode: overlay;
+  background-position: center center;
+}
+
+#asdndz-image_image__icon-container {
+  display: flex;
+}
+
+.direct-upload.direct-upload--pending {
+  display: flex;
+  margin-top: 10px;
+}
+
+.direct-upload__filename {
+  background: #333;
+  color: #fff;
+  padding: 0.3rem 0.5rem;
+  border-radius: 2px 0 0 2px;
+  padding-right: 0.3rem;
+}
+
+.direct-upload__remove {
+  background: #333;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0 2px 2px 0;
+  color: #fff;
+  margin-top: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+  
+body {
+  margin: 0;
+}
+
+.image-home-container{
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+  
+.image-scroll{
+  width: 100%;
+  scroll-snap-align: center;
+}
+
+.image-scroll{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+  
+.image-scroll:nth-child(2n){
+}
+  
+.image-scroll:nth-child(3n){
+}
+
+.first-text{
+  color: white;
+  font-size: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.second-text{
+  color: white;
+  font-size: 35px;
+  position: absolute;
+  top: 22%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+}
+
+.third-text{
+  color: white;
+  font-size: 35px;
+  position: absolute;
+  top: 77%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+}
+
+.profile-pic{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.search-pic{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.avatar-pic{
+  width: 165px;
+  height: 165px;
+  border-radius: 50%;
+}
+
+.image-user{
+  width: 100%;
+  height: auto;
+  padding: 2%;
+}
+
+.image-user-index{
+  width: 100%;
+  height: auto;
+  padding: 2%;
+  border-radius: 4%;
+}
+
+/* .upload-image{
+  width: 500px;
+  height: 500px;
+  border: 1px solid black;
+} */
+
+.form-field{
+  width: 100%;
+}
+
+.mini{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}

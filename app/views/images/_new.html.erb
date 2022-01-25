@@ -1,0 +1,63 @@
+<div class="modal fade" id="new_post" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-header col-12">
+                <h6 class="mt-2 mr-3 col-4">
+                    <% if current_user.avatar.attached? %>
+                        <%= image_tag(current_user.avatar, class: "profile-pic") %> <%= current_user.username %>
+                    <% else %>
+                        <%= image_tag("/images/no_photo.png", :class => "avatar-pic mini mr-2") %> <%= current_user.username %>
+                    <% end %>
+                </h6>
+                <h5 class="modal-title text-primary col-7 pr-2" id="exampleModalLabel">Create a new post</h5>
+            </div>
+            <%= form_for @image = Image.new do |f| %>
+                <div class="modal-body">
+                    <div class="container">
+                        <%= f.label :image, class:"form-label" %>
+                        <div class="form-field d-flex justify-content-center">
+                            <%= f.drag_and_drop_file_field :image %>
+                            <%#= f.file_field :image %>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="container mt-4">
+                        <div class="form-floating">
+                            <%= f.text_area :description, class:"form-control", style:"height: 100px", id:"floatingTextarea2", placeholder:"Leave a comment here" %>
+                            <%= f.label :description, for:"floatingTextarea2" %>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <%= f.submit "Share", class: "btn btn-primary" %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+<script>
+  (function() {
+    var reader = new FileReader()
+    var form = document.querySelector('#new_image')
+    var field = document.querySelector('#image_image')
+    var preview = document.querySelector('#asdndz-image_image')
+
+    reader.onload = function(e) {
+      preview.style.backgroundImage = `url(${e.srcElement.result})`
+    }
+
+    field.addEventListener('dnd-upload:initialize', function(e) {
+      reader.readAsDataURL(e.detail.file)
+    }, false)
+
+    form.addEventListener('click', function(e) {
+      if (event.target.dataset.dndDelete === 'true') {
+        preview.style.backgroundImage = ''
+      }
+    }, true)
+  })()
+</script>

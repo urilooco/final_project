@@ -1,0 +1,45 @@
+<div class="modal fade" id="edit_profile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-primary">Edit profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <%= form_with(model: current_user, local: true) do |form| %>
+                <div class="modal-body col-12">
+                    <% if current_user.errors.any? %>
+                        <div id="error_explanation">
+                        <h2><%= pluralize(current_user.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+                        <ul>
+                            <% category.errors.each do |error| %>
+                            <li><%= error.full_message %></li>
+                            <% end %>
+                        </ul>
+                        </div>
+                    <% end %>
+
+                    <div class="form-group">
+                        <label class="form-label text-secondary">Profile picture</label>
+                        <%= form.file_field :avatar, :class => "form-control" %>
+                    </div>
+                    <div class="form-group mt-2">
+                        <%= form.label :name, class: "form-label text-secondary" %>
+                        <%= form.text_field :name, :class => "form-control" %>
+                    </div>
+                    <div class="form-group mt-2">
+                        <%= form.label :username, class: "form-label text-secondary" %>
+                        <%= form.text_field :username, :class => "form-control" %>
+                    </div>
+                    <div class="form-group mt-2">
+                        <%= form.label :bio, class: "form-label text-secondary" %>
+                        <%= form.text_area :bio, :class => "form-control" %>
+                    </div>
+                <div>
+                <div class="modal-footer">
+                    <%= form.submit "Save", class: "btn btn-primary" %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

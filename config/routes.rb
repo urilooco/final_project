@@ -1,6 +1,20 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  devise_for :users
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  get 'home/index'
+  root 'home#index'
+
+  # get 'profile', to: 'users#edit'
+  # get 'profile', to: 'users#show'
+  get '/@:username', to: 'users#show', as: :profile
+  # get '/:username', to: 'users#show', as: :profile
+  resources :users
+
+  get 'upload', to: 'images#new'
+  resources :images, only: [:index, :show, :create]
+
+  get 'search', to: 'users#search'
+
+  resources :likes, only: [:create, :destroy]
 end
+ 
