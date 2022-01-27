@@ -11,6 +11,7 @@ class User < ApplicationRecord
 
   has_many :images
   has_many :likes
+  has_many :save_images
 
   def to_param
     username

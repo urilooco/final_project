@@ -2,13 +2,11 @@ class ImagesController < ApplicationController
     before_action :authenticate_user!, only: [:new, :create]
 
     def index
-      # @images = Image.order(created_at: :desc).limit(15)
       @images = Image.order("RANDOM()").limit(15)
     end
 
     def show
       @image = Image.find(params[:id])
-      # @user = User.find(params[:id])
     end
 
     def new
