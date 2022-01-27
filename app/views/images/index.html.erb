@@ -19,39 +19,35 @@
                 <div class="col-3">
                     <%= link_to image_tag(image.image, class: "image-user-index mt-3"), image_path(image.id) %>
                     <% if current_user %>
-                        <div class="container d-flex">
-                            <div class="col-11">
-                                <% like = current_user.likes.find_by(image: image) %>
-                                <% if like.nil? %>
-                                    <!-- <form action="/likes" method="post">
-                                        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-                                        <input type="hidden" name="like[image_id]" value="<%= image.id %>">
-                                        
-                                        <button class="btn" type="submit" value="Like">
-                                            <i class="far fa-heart"></i>
-                                        </button>
-                                    </form> -->
-                                    <%= button_to likes_path(like: { image_id: image.id }), method: :post, class: "btn" do %>
+                    <div class="container d-flex">
+                        <div class="col-11">
+                            <% like = current_user.likes.find_by(image: image) %>
+                            <% if like.nil? %>
+                                <form action="/likes" method="post">
+                                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                                    <input type="hidden" name="like[image_id]" value="<%= image.id %>">
+                                    
+                                    <button class="btn" type="submit" value="Like">
                                         <i class="far fa-heart"></i>
-                                    <% end %>
-                                <% else %>
-                                    <!-- <form action="<% like_path(like) %>" method="post">
-                                        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        
-                                        <button class="btn" type="submit" value="Unlike">
-                                            <i class="far fa-heart text-danger"></i>
-                                        </button>
-                                    </form> -->
-                                    <%= button_to like_path(like), method: :delete, class: "btn" do %>
+                                    </button>
+                                    
+                                </form>
+                                
+                            <% else %>
+                                <form action="<% like_path(like) %>" method="post">
+                                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    
+                                    <button class="btn" type="submit" value="Unlike">
                                         <i class="far fa-heart text-danger"></i>
-                                    <% end %>
-                                <% end %>
-                            </div>
-                            <div>
-                                <i class="far fa-bookmark"></i>
-                            </div>
+                                    </button>
+                                </form>
+                            <% end %>
                         </div>
+                        <div>
+                            <i class="far fa-bookmark"></i>
+                        </div>
+                    </div>
                     <% end %>
                     <div class="container d-flex mt-2">
                         <% if image.user.avatar.attached? %>

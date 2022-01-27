@@ -13,8 +13,6 @@ class LikesController < ApplicationController
         @like = current_user.likes.find(params[:id])
         image = @like.image
         @like.destroy
-
-        redirect_to images_path
     end
     
     private

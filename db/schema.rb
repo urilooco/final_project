@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 2022_01_21_170140) do
     t.integer "image_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index "\"user_id\", \"post_id\"", name: "index_likes_on_user_id_and_post_id", unique: true
     t.index ["image_id"], name: "index_likes_on_image_id"
-    t.index ["user_id", "image_id"], name: "index_likes_on_user_id_and_image_id", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
