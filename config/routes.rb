@@ -3,15 +3,16 @@ Rails.application.routes.draw do
 
   get 'home/index'
   root 'home#index'
-
-  # get 'profile', to: 'users#edit'
-  # get 'profile', to: 'users#show'
+  
   get '/@:username', to: 'users#show', as: :profile
-  # get '/:username', to: 'users#show', as: :profile
+  
   resources :users
 
   get 'upload', to: 'images#new'
   resources :images, only: [:index, :show, :create]
+
+  resources :save_images, only: [:index]
+  get '/save_images/saved', to: 'save_images#index', as: 'saved'
 
   get 'search', to: 'users#search'
  

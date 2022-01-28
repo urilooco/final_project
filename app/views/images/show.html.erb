@@ -4,14 +4,39 @@
       <div class="card">
         <div class="card-body p-2">
           <%= image_tag @image.image, class: 'd-block w-100' %>
+          <% if current_user %>
+            <div class="container d-flex mt-2">
+              <div class="col-11">
+                <% like = current_user.likes.find_by(image: @image) %>
+                <% if like.nil? %>
+                  <%= button_to likes_path(like: { image_id: @image.id }), method: :post, class: "btn" do %>
+                    <i class="far fa-heart fs-3"></i>
+                  <% end %>
+                <% else %>
+                  <%= button_to like_path(like), method: :delete, class: "btn" do %>
+                    <i class="far fa-heart text-danger fs-3"></i>
+                    <% end %>
+                <% end %>
+              </div>
+              <div>
+                <% save_image = current_user.save_images.find_by(image: @image) %>
+                  <% if save_image.nil? %>
+                    <%= button_to save_images_path(save_image: { image_id: @image.id }), method: :post, class: "btn" do %>
+                      <i class="far fa-bookmark fs-3"></i>
+                    <% end %>
+                  <% else %>
+                    <%= button_to save_image_path(save_image), method: :delete, class: "btn" do %>
+                      <i class="far fa-bookmark text-success fs-3"></i>
+                    <% end %>
+                  <% end %>
+              </div>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
 
     <div class="col-3">
-      <%#= link_to @image.user.attached, profile_path(@image.user.id) %>
-      <%#= link_to image_tag(current_user.avatar, class: "profile-pic mt-2"), profile_path(@image.user.id) %>
-      <%#= link_to image_tag(@user.avatar, class: "profile-pic mt-2"), profile_path(@image.user.id) %>
       <% if @image.user.avatar.attached? %>
         <%= link_to image_tag(@image.user.avatar, class: "mini"), profile_path(@image.user.username) %>
       <% else %>

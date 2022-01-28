@@ -1,6 +1,10 @@
 class SaveImagesController < ApplicationController
     before_action :authenticate_user!, only: [:create, :destroy]
 
+    def index
+        @saved_image = current_user.save_images.order(created_at: :desc)
+    end
+
     def create
         @save_images = current_user.save_images.new(save_image_params)
         if !@save_images.save
@@ -11,7 +15,6 @@ class SaveImagesController < ApplicationController
     
     def destroy
         @save_images = current_user.save_images.find(params[:id])
-        image = @save_images.image
         @save_images.destroy
 
         redirect_to images_path

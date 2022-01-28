@@ -11,7 +11,6 @@ class LikesController < ApplicationController
     
     def destroy
         @like = current_user.likes.find(params[:id])
-        image = @like.image
         @like.destroy
 
         redirect_to images_path

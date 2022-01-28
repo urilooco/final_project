@@ -27,15 +27,10 @@
     <hr class="mt-5">
 
     <div class="d-flex justify-content-center">
-        <div class="d-flex mt-3 col-8">
-            <% if current_user %>
-                <% if @user.id == current_user.id %>
-                    <h5 class="col-6 text-center bg-light text-secondary text-uppercase"><i class="fas fa-border-all"></i> Posts</h5> |
-                    <h5 class="col-6 text-center bg-light text-secondary text-uppercase"><i class="far fa-bookmark"></i> Saved</h5>
-                <% else %>
-                    <h5 class="col-12 text-center bg-light text-secondary text-uppercase"><i class="fas fa-border-all"></i> Posts</h5>
-                <% end %>
-            <% end %>
+        <div class="d-flex mt-1 col-8">
+            <div class="col-12 d-flex justify-content-center">
+                <h5 class="col-12 text-center bg-light text-secondary text-uppercase py-1"><i class="fas fa-border-all"></i> Posts</h5>
+             </div>
         </div>
     </div>
         
@@ -44,16 +39,6 @@
             <% @images.each do |image| %>
                 <div class="col-4">
                     <%= link_to image_tag(image.image, class: "image-user"), image_path(image.id) %>
-                </div>
-            <% end %>
-        </div>
-    </div>
-        
-    <div class="d-flex justify-content-center col-12">
-        <div class="row">
-            <% @saved_image.each do |image| %>
-                <div class="col-4">
-                    <%= link_to image_tag(image.image.image, class: "image-user"), image_path(image.image.id) %>
                 </div>
             <% end %>
         </div>
