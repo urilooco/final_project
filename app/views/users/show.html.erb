@@ -1,11 +1,7 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-center">
         <div class="col-4 d-flex justify-content-end mt-2">
-            <% if @user.avatar.attached? %>
-                <%= image_tag url_for(@user.avatar), :class => "avatar-pic" %>
-            <% else %>
-                <%= image_tag("/images/no_photo.png", :class => "avatar-pic") %>
-            <% end %>
+            <%= image_tag(@user_presenter.profile_image, :class => "avatar-pic") %>
         </div>
         
         <div class="col-4">
@@ -27,15 +23,10 @@
     <hr class="mt-5">
 
     <div class="d-flex justify-content-center">
-        <div class="d-flex mt-3 col-8">
-            <% if current_user %>
-                <% if @user.id == current_user.id %>
-                    <h5 class="col-6 text-center bg-light text-secondary text-uppercase"><i class="fas fa-border-all"></i> Publications</h5> |
-                    <h5 class="col-6 text-center bg-light text-secondary text-uppercase"><i class="far fa-bookmark"></i> Saved</h5>
-                <% else %>
-                    <h5 class="col-12 text-center bg-light text-secondary text-uppercase"><i class="fas fa-border-all"></i> Publications</h5>
-                <% end %>
-            <% end %>
+        <div class="d-flex mt-1 col-8">
+            <div class="col-12 d-flex justify-content-center">
+                <h5 class="col-12 text-center bg-light text-secondary text-uppercase py-1"><i class="fas fa-border-all"></i> Posts</h5>
+             </div>
         </div>
     </div>
         
@@ -43,7 +34,6 @@
         <div class="row">
             <% @images.each do |image| %>
                 <div class="col-4">
-                    <%#= image_tag(image.image, :class => "image-user") %>
                     <%= link_to image_tag(image.image, class: "image-user"), image_path(image.id) %>
                 </div>
             <% end %>

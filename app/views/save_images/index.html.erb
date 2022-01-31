@@ -1,0 +1,15 @@
+<div class="container mt-3">
+    <div class="col-12 d-flex justify-content-center my-4">
+        <%= image_tag(@user_presenter.profile_image, :class => "avatar-pic") %>
+    </div>
+    <h3 class="text-center text-secondary">Only you can see what you saved</h3>
+    <div class="d-flex justify-content-center col-12">
+        <div class="row">
+            <% @saved_images.each do |saved_image| %>
+                <div class="col-4">
+                    <%= link_to image_tag(saved_image.image.image, class: "image-user"), image_path(saved_image.image.id) %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
