@@ -13,9 +13,9 @@ class User < ApplicationRecord
   has_many :likes
   has_many :save_images
 
+  scope :by_username, ->(username) { where("username LIKE ?", "%#{username}%") }
+
   def to_param
     username
   end
-
-  scope :by_username, ->(username) { where("username LIKE ?", "%#{username}%") }
 end

@@ -1,6 +1,4 @@
-class SaveImagesController < ApplicationController
-    before_action :authenticate_user!, only: [:create, :destroy]
-
+class SaveImagesController < AuthorizationsController
     def index
         @saved_images = current_user.save_images.order(created_at: :desc)
         @user = current_user

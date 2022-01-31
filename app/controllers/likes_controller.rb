@@ -1,6 +1,4 @@
-class LikesController < ApplicationController
-    before_action :authenticate_user!, only: [:create, :destroy]
-
+class LikesController < AuthorizationsController
     def create
         @like = current_user.likes.new(like_params)
         if !@like.save

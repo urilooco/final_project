@@ -1,5 +1,5 @@
-class ImagesController < ApplicationController
-    before_action :authenticate_user!, only: [:new, :create]
+class ImagesController < AuthorizationsController
+    skip_before_action :authenticate_user!, only: [:index, :show]
 
     def index
       @images = Image.order("RANDOM()").limit(15)

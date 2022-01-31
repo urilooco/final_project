@@ -1,5 +1,5 @@
-class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:edit, :update]
+class UsersController < AuthorizationsController
+  skip_before_action :authenticate_user!, only: [:show]
   
   def show
     @user = User.find_by(username: params[:username])
