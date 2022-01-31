@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :save_images, only: [:index]
   get '/save_images/saved', to: 'save_images#index', as: 'saved'
 
-  get 'search', to: 'users#search'
+  get 'search', to: 'search#show'
  
   resources :likes, only: [:create, :destroy]
 

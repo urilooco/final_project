@@ -7,10 +7,6 @@ class UsersController < ApplicationController
     @saved_image = @user.save_images.order(created_at: :desc)
   end
 
-  def search
-    @users = User.where("username LIKE ?", "%" + params[:username] + "%")
-  end  
-
   def edit
   end
 
