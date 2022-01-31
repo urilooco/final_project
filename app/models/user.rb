@@ -16,4 +16,6 @@ class User < ApplicationRecord
   def to_param
     username
   end
+
+  scope :by_username, ->(username) { where("username LIKE ?", "%#{username}%") }
 end

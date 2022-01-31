@@ -27,7 +27,7 @@
               <%= render "images/new" %>
             </li>
             <li class="nav-item">
-              <%= link_to saved_path, class: "nav-link active fs-4 btn me-2" do %>
+              <%= link_to save_images_url, class: "nav-link active fs-4 btn me-2" do %>
                 <i class="fas fa-bookmark"></i>
               <% end %>
             </li>
@@ -35,7 +35,7 @@
               <% if current_user.avatar.attached? %>
                 <%= link_to image_tag(current_user.avatar, class: "profile-pic mt-2 me-"), profile_path(current_user) %>
               <% else %>
-                <%= link_to user_path(current_user), class: "nav-link active fs-4 btn me-1" do %>
+                <%= link_to profile_path(current_user), class: "nav-link active fs-4 btn me-2"  do %>
                   <i class="fas fa-user"></i>
                 <% end %>
               <% end %>

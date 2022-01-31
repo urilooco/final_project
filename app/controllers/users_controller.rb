@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     @user = User.find_by(username: params[:username])
     @images = @user.images.order(created_at: :desc)
     @saved_image = @user.save_images.order(created_at: :desc)
+    @user_presenter = UserPresenter.new(@user)
   end
 
   def edit

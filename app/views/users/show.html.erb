@@ -1,11 +1,7 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-center">
         <div class="col-4 d-flex justify-content-end mt-2">
-            <% if @user.avatar.attached? %>
-                <%= image_tag url_for(@user.avatar), :class => "avatar-pic" %>
-            <% else %>
-                <%= image_tag("/images/no_photo.png", :class => "avatar-pic") %>
-            <% end %>
+            <%= image_tag(@user_presenter.profile_image, :class => "avatar-pic") %>
         </div>
         
         <div class="col-4">
