@@ -11,19 +11,19 @@
 </div>
 <div class="card container py-4 mb-3">
     <div class="container d-flex justify-content-center">
-        <canvas id="canvas">
-        </canvas>
-        <div class="output">
-            <img id="photo" alt="The screen capture will appear in this box."> 
-        </div>
-    </div>
-    <div class="container d-flex justify-content-center">
         <%= form_with(model: @image, method: :post) do |f| %>
             <div class="modal-body">
                 <div class="container">
                     <%= f.label :image, class:"form-label" %>
                     <div class="form-field d-flex justify-content-center">
-                        <%= f.file_field :image, :class => "form-control", accept: 'image/png, image/jpeg, image/jpg', id: "imageFileField" %>
+                        <%= f.file_field :image, class: "is_hidden", accept: 'image/png, image/jpeg, image/jpg', id: "imageFileField" %>
+                    </div>
+                    <div class="container d-flex justify-content-center">
+                        <canvas id="canvas">
+                        </canvas>
+                        <div class="output">
+                            <img id="photo" alt="The screen capture will appear in this box."> 
+                        </div>
                     </div>
                 </div>
                 <hr>
@@ -66,7 +66,7 @@
             video.play();
         })
         .catch(function(err) {
-            console.log("An error occurred: " + err);
+            alert("An error occurred: " + err);
         });
 
         video.addEventListener('canplay', function(ev){

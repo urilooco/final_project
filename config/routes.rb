@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'camera/new'
   devise_for :users
 
   get 'home/index'
@@ -19,5 +18,7 @@ Rails.application.routes.draw do
   resources :likes, only: [:create, :destroy]
 
   resources :save_images, only: [:create, :destroy]
+
+  resources :camera, only: [:new]
 end
  
