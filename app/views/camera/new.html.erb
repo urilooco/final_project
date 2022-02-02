@@ -1,0 +1,130 @@
+<h1 class="text-center my-3">Take a photo</h1>
+<div class="container">
+    <div class="camera d-flex justify-content-center col-12">
+        <video id="video">Video stream not available.</video>
+    </div>
+    <div class="d-flex justify-content-center col-12">
+        <button class="btn btn-outline-dark my-2" id="startButton">
+            <i class="fas fa-dot-circle fs-1"></i>
+        </button>
+    </div>
+</div>
+<div class="card container py-4 mb-3">
+    <div class="container d-flex justify-content-center">
+        <canvas id="canvas">
+        </canvas>
+        <div class="output">
+            <img id="photo" alt="The screen capture will appear in this box."> 
+        </div>
+    </div>
+    <div class="container d-flex justify-content-center">
+        <%= form_with(model: @image, method: :post) do |f| %>
+            <div class="modal-body">
+                <div class="container">
+                    <%= f.label :image, class:"form-label" %>
+                    <div class="form-field d-flex justify-content-center">
+                        <%= f.file_field :image, :class => "form-control", accept: 'image/png, image/jpeg, image/jpg', id: "imageFileField" %>
+                    </div>
+                </div>
+                <hr>
+                <div class="container mt-4">
+                    <div class="form-floating">
+                        <%= f.text_area :description, class:"form-control", style:"height: 100px", id:"floatingTextarea2", placeholder:"Leave a comment here" %>
+                        <%= f.label :description, for:"floatingTextarea2" %>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <%= f.submit "Share", class: "btn btn-primary" %>
+            </div>
+        <% end %>
+    </div>
+</div>
+
+<script charset="utf-8">
+    (function() {
+    var width = 320;
+    var height = 0;
+
+    var streaming = false;
+
+    var video = null;
+    var canvas = null;
+    var photo = null;
+    var startButton = null;
+
+    function startup() {
+        video = document.getElementById('video');
+        canvas = document.getElementById('canvas');
+        photo = document.getElementById('photo');
+        startButton = document.getElementById('startButton');
+        field = document.getElementById('imageFileField');
+
+        navigator.mediaDevices.getUserMedia({video: true, audio: false})
+        .then(function(stream) {
+            video.srcObject = stream;
+            video.play();
+        })
+        .catch(function(err) {
+            console.log("An error occurred: " + err);
+        });
+
+        video.addEventListener('canplay', function(ev){
+        if (!streaming) {
+            height = video.videoHeight / (video.videoWidth/width);
+        
+            if (isNaN(height)) {
+                height = width / (4/3);
+            }
+        
+            video.setAttribute('width', width);
+            video.setAttribute('height', height);
+            canvas.setAttribute('width', width);
+            canvas.setAttribute('height', height);
+            streaming = true;
+        }
+        }, false);
+
+        startButton.addEventListener('click', function(ev){
+            takepicture();
+            ev.preventDefault();
+        }, false);
+        
+        clearphoto();
+    }
+
+    function clearphoto() {
+        var context = canvas.getContext('2d');
+        context.fillStyle = "#AAA";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+
+        var data = canvas.toDataURL('image/png');
+        photo.setAttribute('src', data);
+    }
+
+    function takepicture() {
+        var context = canvas.getContext('2d');
+        if (width && height) {
+            canvas.width = width;
+            canvas.height = height;
+            context.drawImage(video, 0, 0, width, height);
+
+            var data = canvas.toDataURL('image/png');
+            photo.setAttribute('src', data);
+            canvas.toBlob((blob) => {
+                const myFile = new File([blob], "image.jpeg", {
+                    type: blob.type,
+                    size: blob.size
+                });
+                let container = new DataTransfer();
+                container.items.add(myFile);
+                field.files = container.files;
+            }, 'image/jpeg', 0.95);
+        } else {
+            clearphoto();
+        }
+    }
+    
+    window.addEventListener('load', startup, false);
+    })();
+</script>

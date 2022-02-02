@@ -18,7 +18,7 @@ class ImagesController < AuthorizationsController
       if @image.save
         redirect_to image_path(@image.id)
       else
-        render :new
+        flash[:notice] = @image.errors.full_messages.to_sentence
       end
     end
 
