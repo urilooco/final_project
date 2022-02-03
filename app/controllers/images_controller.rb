@@ -25,9 +25,8 @@ class ImagesController < AuthorizationsController
 
     def destroy
       @image.destroy
-      respond_to do |format|
-        format.html { redirect_to images_path, notice: "Image was successfully destroyed." }
-      end
+
+      redirect_to images_path, notice: "Image was successfully destroyed."
     end
 
     private
