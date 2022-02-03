@@ -20,36 +20,32 @@ export default class extends Controller {
         alert("An error occurred: " + err);
       });
 
-      this.videoTarget.addEventListener(
-      "canplay",
-      (ev) => {
-        if (!this.streaming) {
-          this.height = this.videoTarget.videoHeight / (this.videoTarget.videoWidth / this.width);
+    this.videoTarget.addEventListener("canplay", (ev) => this.handleCanPlay(ev), false);
 
-          if (isNaN(this.height)) {
-            this.height = this.width / (4 / 3);
-          }
-
-          this.videoTarget.setAttribute("width", this.width);
-          this.videoTarget.setAttribute("height", this.height);
-          this.canvasTarget.setAttribute("width", this.width);
-          this.canvasTarget.setAttribute("height", this.height);
-          this.streaming = true;
-        }
-      },
-      false
-    );
-
-    this.startButtonTarget.addEventListener(
-      "click",
-      (ev) => {
-        this.takepicture();
-        ev.preventDefault();
-      },
-      false
-    );
+    this.startButtonTarget.addEventListener("click", (ev) => this.startButtonHandler(ev), false);
 
     this.clearphoto();
+  }
+
+  handleCanPlay(ev){
+    if (!this.streaming) {
+      this.height = this.videoTarget.videoHeight / (this.videoTarget.videoWidth / this.width);
+
+      if (isNaN(this.height)) {
+        this.height = this.width / (4 / 3);
+      }
+
+      this.videoTarget.setAttribute("width", this.width);
+      this.videoTarget.setAttribute("height", this.height);
+      this.canvasTarget.setAttribute("width", this.width);
+      this.canvasTarget.setAttribute("height", this.height);
+      this.streaming = true;
+    }
+  }
+
+  startButtonHandler(ev){
+    this.takepicture();
+    ev.preventDefault();
   }
 
   clearphoto() {
