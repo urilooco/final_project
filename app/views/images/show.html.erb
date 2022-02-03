@@ -37,11 +37,7 @@
     </div>
 
     <div class="col-3">
-      <% if @image.user.avatar.attached? %>
-        <%= link_to image_tag(@image.user.avatar, class: "mini"), profile_path(@image.user.username) %>
-      <% else %>
-        <%= link_to image_tag("/images/no_photo.png", :class => "mini"), profile_path(@image.user.username) %>
-      <% end %>
+      <%= link_to image_tag(@user_presenter.profile_image, :class => "mini"), profile_path(@image.user.username) %>
       <%= link_to @image.user.username, profile_path(@image.user.username), class: "search-text ms-1" %>
 
       <p class="border-top mt-3 py-2">
@@ -50,6 +46,10 @@
         <% end %>
         <span class="text-muted"><%= time_ago_in_words @image.created_at %> ago</span>
       </p>
+
+      <% if @image.user_id == current_user.id %>
+        <%= button_to "Delete photo", @image, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+      <% end %>
     </div>
   </div>
 </div>

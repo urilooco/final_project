@@ -18,9 +18,8 @@
                 <div class="modal-body">
                     <div class="container">
                         <%= f.label :image, class:"form-label" %>
-                        <div class="form-field d-flex justify-content-center drag_and_drop">
-                            <%= f.drag_and_drop_file_field :image, class:"fasdas" %>
-                            <%#= f.file_field :image %>
+                        <div class="form-field d-flex justify-content-center">
+                            <%= f.file_field :image, :class => "form-control", accept: 'image/png, image/jpeg, image/jpg' %>
                         </div>
                     </div>
                     <hr>
@@ -38,26 +37,3 @@
         </div>
     </div>
 </div>
-
-<script>
-  (function() {
-    var reader = new FileReader()
-    var form = document.querySelector('#new_image')
-    var field = document.querySelector('#image_image')
-    var preview = document.querySelector('#asdndz-image_image')
-
-    reader.onload = function(e) {
-      preview.style.backgroundImage = `url(${e.srcElement.result})`
-    }
-
-    field.addEventListener('dnd-upload:initialize', function(e) {
-      reader.readAsDataURL(e.detail.file)
-    }, false)
-
-    form.addEventListener('click', function(e) {
-      if (event.target.dataset.dndDelete === 'true') {
-        preview.style.backgroundImage = ''
-      }
-    }, true)
-  })()
-</script>

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :users
 
   get 'upload', to: 'images#new'
-  resources :images, only: [:index, :show, :create]
+  resources :images, only: [:index, :show, :create, :destroy]
 
   resources :save_images, only: [:index]
   
@@ -18,5 +18,7 @@ Rails.application.routes.draw do
   resources :likes, only: [:create, :destroy]
 
   resources :save_images, only: [:create, :destroy]
+
+  resources :camera, only: [:new]
 end
  

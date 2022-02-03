@@ -1,12 +1,13 @@
 class ImagesController < AuthorizationsController
     skip_before_action :authenticate_user!, only: [:index, :show]
+    before_action :find_image, only: %i[ show destroy ]
 
     def index
       @images = Image.order("RANDOM()").limit(15)
     end
 
     def show
-      @image = Image.find(params[:id])
+      @user_presenter = UserPresenter.new(@image.user)
     end
 
     def new
@@ -18,11 +19,21 @@ class ImagesController < AuthorizationsController
       if @image.save
         redirect_to image_path(@image.id)
       else
-        render :new
+        flash[:notice] = @image.errors.full_messages.to_sentence
       end
     end
 
+    def destroy
+      @image.destroy
+
+      redirect_to images_path, notice: "Image was successfully destroyed."
+    end
+
     private
+
+    def find_image
+      @image = Image.find(params[:id])
+    end
   
     def image_params
       params.require(:image).permit(:image, :description)

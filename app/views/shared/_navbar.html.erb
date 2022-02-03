@@ -27,6 +27,11 @@
               <%= render "images/new" %>
             </li>
             <li class="nav-item">
+              <%= link_to new_camera_path, class: "nav-link active fs-4 btn me-2" do %>
+                <i class="fas fa-camera-retro"></i>
+              <% end %>
+            </li>
+            <li class="nav-item">
               <%= link_to save_images_url, class: "nav-link active fs-4 btn me-2" do %>
                 <i class="fas fa-bookmark"></i>
               <% end %>

@@ -1,0 +1,45 @@
+<h1 class="text-center my-3">Take a photo</h1>
+<div data-controller="camera">
+    <div class="container">
+        <div class="camera d-flex justify-content-center col-12">
+            <video id="video" data-camera-target="video">Video stream not available.</video>
+        </div>
+        <div class="d-flex justify-content-center col-12">
+            <button class="btn btn-outline-dark my-2" id="startButton" data-camera-target="startButton">
+                <i class="fas fa-dot-circle fs-1"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="card container py-4 mb-3">
+        <div class="container d-flex justify-content-center">
+            <%= form_with(model: @image, method: :post) do |f| %>
+                <div class="modal-body">
+                    <div class="container">
+                        <%= f.label :image, class:"form-label" %>
+                        <div class="form-field d-flex justify-content-center">
+                            <%= f.file_field :image, class: "is_hidden", accept: 'image/png, image/jpeg, image/jpg', id: "imageFileField", data: { "camera-target": "imageFileField" } %>
+                        </div>
+                        <div class="container d-flex justify-content-center">
+                            <canvas id="canvas" data-camera-target="canvas">
+                            </canvas>
+                            <div class="output">
+                                <img id="photo" alt="The screen capture will appear in this box." data-camera-target="photo"> 
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="container mt-4">
+                        <div class="form-floating">
+                            <%= f.text_area :description, class:"form-control", style:"height: 100px", id:"floatingTextarea2", placeholder:"Leave a comment here" %>
+                            <%= f.label :description, for:"floatingTextarea2" %>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <%= f.submit "Share", class: "btn btn-primary" %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
