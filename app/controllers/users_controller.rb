@@ -1,8 +1,8 @@
 class UsersController < AuthorizationsController
   skip_before_action :authenticate_user!, only: [:show]
-  
+
   def show
-    @user = User.find_by(username: params[:username])
+    @user = User.find_by!(username: params[:username] || params[:id])
     @images = @user.images.order(created_at: :desc)
     @user_presenter = UserPresenter.new(@user)
   end

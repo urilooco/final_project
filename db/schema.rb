@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2022_01_27_172111) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -41,7 +44,7 @@ ActiveRecord::Schema.define(version: 2022_01_27_172111) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -49,8 +52,8 @@ ActiveRecord::Schema.define(version: 2022_01_27_172111) do
   end
 
   create_table "likes", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "image_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "image_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["image_id"], name: "index_likes_on_image_id"
@@ -59,8 +62,8 @@ ActiveRecord::Schema.define(version: 2022_01_27_172111) do
   end
 
   create_table "save_images", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "image_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "image_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["image_id"], name: "index_save_images_on_image_id"
@@ -74,10 +77,6 @@ ActiveRecord::Schema.define(version: 2022_01_27_172111) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at", precision: 6
     t.datetime "remember_created_at", precision: 6
-    t.string "confirmation_token"
-    t.datetime "confirmed_at", precision: 6
-    t.datetime "confirmation_sent_at", precision: 6
-    t.string "unconfirmed_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
@@ -85,6 +84,7 @@ ActiveRecord::Schema.define(version: 2022_01_27_172111) do
     t.text "bio"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
