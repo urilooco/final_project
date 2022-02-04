@@ -3,7 +3,7 @@ class Image < ApplicationRecord
 
   validates :image, presence: true
 
-  validates_length_of :description, :maximum => 100
+  validates_length_of :description, maximum: 100
 
   has_one_attached :image
   has_many :likes
