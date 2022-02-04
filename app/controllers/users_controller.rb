@@ -13,7 +13,7 @@ class UsersController < AuthorizationsController
   def update
     current_user.update(user_params)
 
-    redirect_to root_path
+    redirect_back(fallback_location: root_path)
   end
 
   private

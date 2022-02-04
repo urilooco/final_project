@@ -5,7 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   validates :username, presence: true, uniqueness: { case_sensitive: false }
+  validates_format_of :username, :with => /[a-zA-Z0-9\.]+/
+  validates_length_of :username, :in => 6..13
+
   validates :name, presence: true
+  validates_format_of :name, :with => /[a-zA-Z]+/
+  validates_length_of :name, :in => 8..35
   
   has_one_attached :avatar
 
