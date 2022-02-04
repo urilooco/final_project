@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'home/index'
   root 'home#index'
   
-  get '/@:username', to: 'users#show', as: :profile
+  get '/@:username', to: 'users#show', as: :profile, constraints: { username: /[a-zA-Z0-9\.]+/ }
   
   resources :users
 
