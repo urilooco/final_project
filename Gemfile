@@ -30,6 +30,7 @@ gem "jbuilder"
 gem 'sass-rails'
 gem 'devise'
 gem 'active_storage_drag_and_drop'
+gem "aws-sdk-s3", require: false
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
