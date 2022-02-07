@@ -1,7 +1,11 @@
 require "test_helper"
 
 class LikeTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  def setup
+    @like = Like.new(user_id: 1, image_id: 1)
+  end
+
+  test 'valid like' do
+    assert @like.valid?
+  end
 end

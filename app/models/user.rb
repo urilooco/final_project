@@ -6,7 +6,8 @@ class User < ApplicationRecord
   
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates_format_of :username, with: /[a-zA-Z0-9\.]+/
-  validates_length_of :username, in: 6..13
+  validates :username, format: { without: /\s/, message: "must contain no spaces" }
+  validates_length_of :username, in: 6..20
 
   validates :name, presence: true
   validates_format_of :name, with: /[a-zA-Z]+/
