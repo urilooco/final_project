@@ -19,6 +19,11 @@
             </div>
         </div>
     </div>
+    <% unless @user.id == current_user.id %>
+        <div class="d-flex justify-content-center mt-4 col-5">
+            <%= button_to "Send message", chats_path(chat: { user_id: @user.id }), method: :post, class: "btn btn-primary" %>
+        </div>
+    <% end %>
 
     <hr class="mt-5">
 

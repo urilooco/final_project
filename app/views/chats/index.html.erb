@@ -1,0 +1,48 @@
+<div id="chat-id" data-chat-id="<%= @chat.try(:id) %>"></div>
+<div id="user-id" data-user-id="<%= current_user.id %>"></div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3 chats-sidebar">
+      <div class="card my-4 no-outline">
+        <div class="card-body">
+          <h5 class="card-title text-center">Chats</h5>
+        </div>
+      </div>
+
+      <hr>
+
+      <% @chats.each do |chat| %>
+        <%= link_to chat, class: 'chat-link' do%>
+          <% active_class = (@chat == chat ) ? 'active' : '' %>
+          <div class="card mb-2 chat-card <%= active_class %>">
+            <div class="card-body">
+              <%#= image_tag url_for(chat.user.avatar), :class => "mini" %>
+              <%= chat.user.username %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="col-9">
+      <% if @chat.present? %>
+        <div class="chat-room">
+          <nav class="navbar navbar-light bg-light mb-4">
+            <div class="container-fluid">
+              <span class="navbar-brand mb-0 h1"><%= @chat.user.username %></span>
+            </div>
+          </nav>
+          <div id="messages">
+            <% @chat.messages.each do |message| %>
+              <%= render "messages/message", message: message %>
+            <% end %>
+          </div>
+          <div class="chat-box col-8">
+            <%= render "messages/form", message: Message.new, chat: @chat  %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
