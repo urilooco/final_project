@@ -8,7 +8,7 @@ class SaveImagesControllerTest < ActionDispatch::IntegrationTest
 
   test "can get camera path" do
     sign_in users(:user_001)
-    get save_images_url
+    get save_images_path
     assert_response :success
   end
 end

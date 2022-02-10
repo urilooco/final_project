@@ -10,6 +10,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should get edit" do
+    sign_in users(:user_001)
+    get edit_user_path(:user_001)
+    # assert_template 'users/edit'
+    assert_template partial: '_edit'
+  end
+
   # test "should get profile edit" do
   #   get edit_profile_path
   #   assert_response :redirect

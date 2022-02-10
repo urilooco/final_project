@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_27_172111) do
+ActiveRecord::Schema.define(version: 2022_02_09_185339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,13 @@ ActiveRecord::Schema.define(version: 2022_01_27_172111) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "chats", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_chats_on_user_id"
+  end
+
   create_table "images", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.text "description"
@@ -59,6 +66,16 @@ ActiveRecord::Schema.define(version: 2022_01_27_172111) do
     t.index ["image_id"], name: "index_likes_on_image_id"
     t.index ["user_id", "image_id"], name: "index_likes_on_user_id_and_image_id", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.bigint "chat_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "save_images", force: :cascade do |t|
@@ -88,9 +105,12 @@ ActiveRecord::Schema.define(version: 2022_01_27_172111) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "chats", "users"
   add_foreign_key "images", "users"
   add_foreign_key "likes", "images"
   add_foreign_key "likes", "users"
+  add_foreign_key "messages", "chats"
+  add_foreign_key "messages", "users"
   add_foreign_key "save_images", "images"
   add_foreign_key "save_images", "users"
 end

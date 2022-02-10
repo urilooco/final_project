@@ -59,10 +59,10 @@ class UserTest < ActiveSupport::TestCase
   #   assert_not @user.valid?
   # end
 
-  # test 'invalid with characters in the name' do
-  #   @user.name = 'John Lenn@n'
-  #   assert_not @user.valid?
-  # end
+  test 'invalid with characters in the name' do
+    @user.name = 'John Lenn@n'
+    assert_not @user.valid?
+  end
 
   test 'invalid without email' do
     @user.email = nil

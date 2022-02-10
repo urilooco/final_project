@@ -20,5 +20,9 @@ Rails.application.routes.draw do
   resources :save_images, only: [:create, :destroy]
 
   resources :camera, only: [:new]
+
+  resources :messages
+  
+  resources :chats
 end
  
