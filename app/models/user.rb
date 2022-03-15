@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_many :images
   has_many :likes
   has_many :save_images
+  has_and_belongs_to_many :chats
 
   scope :by_username, ->(username) { where("username LIKE ?", "%#{username}%") }
 

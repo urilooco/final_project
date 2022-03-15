@@ -202,6 +202,8 @@ body {
 }
 
 .chat-link {
+  text-decoration: none;
+  color: black;
   &:hover {
    text-decoration: none;
   }
@@ -212,9 +214,10 @@ body {
       background-color: #eeeeee;
     }
     &.active {
-      background-color: black;
+      background-color: grey;
       .name {
         color: white;
+        text-decoration: none;
       }
     }
     .name {
